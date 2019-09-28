@@ -1,12 +1,10 @@
 <template>
-  <div>hello</div>
+  <div>推荐</div>
 </template>
-
 <script>
 export default {
-  name: 'Hello'
+  name: 'recommend'
 }
 </script>
-
-<style>
+<style scoped>
 </style>

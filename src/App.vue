@@ -1,16 +1,19 @@
 <template>
   <div id="app" @touchmove.prevent>
     <m-header></m-header>
+    <tab></tab>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Tab from 'components/tab/tab'
 import MHeader from 'components/m-header/m-header'
 export default {
   name: 'App',
   components: {
-    MHeader
+    MHeader,
+    Tab
   }
 }
 </script>
@@ -21,7 +24,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
