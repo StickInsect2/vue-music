@@ -1,5 +1,4 @@
 import originJsonp from 'jsonp'
-
 // 封装后的jsonp
 /*  @param{String} url 请求的服务器地址
     @param{Obj} data 向服务器发送的数据

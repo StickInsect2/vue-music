@@ -3,8 +3,8 @@ import { jsonpCommonParam, options, UrlRecommend } from './config'
 import axios from 'axios'
 
 // 获取推荐页面的数据
-export function getRecommend () {
-  const data = Object.assign({}, jsonpCommonParam, {
+export function getRecommend() {
+  let data = Object.assign({}, jsonpCommonParam, {
     uin: 0,
     platform: 'h5',
     needNewCode: 1

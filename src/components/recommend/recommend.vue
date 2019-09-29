@@ -1,27 +1,33 @@
 <template>
   <div class="recommend">
-    <Scroll class="recommend-content" :data = "discLists" ref = "scroll">
+    <Scroll class="recommend-content" :data="discLists" ref="scroll">
       <div>
-        <div class="slider-wrapper">
-          轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图轮播图
+      <div v-if="discLists.length">
+        <slide  class="slider-wrapper">
+          <div v-for="(item,index) in recomends" :key="index">
+            <a :href="item.linkUrl">
+              <img :src="item.picUrl" alt />
+            </a>
+          </div>
+        </slide>
         </div>
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li  class="item" v-for="(item,index) in discLists" :key = "index">
-                <div class="icon">
-                  <img width="60" height="60" v-lazy="item.imgurl">
-                </div>
-                <div class="text">
-                  <h2 class="name" v-html="item.creator.name"></h2>
-                  <p class="desc" v-html="item.dissname"></p>
-                </div>
-              </li>
+            <li class="item" v-for="(item,index) in discLists" :key="index">
+              <div class="icon">
+                <img width="60" height="60" v-lazy="item.imgurl" />
+              </div>
+              <div class="text">
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
+              </div>
+            </li>
           </ul>
         </div>
-      </div>
       <div class="loading-conatiner" v-show="!discLists.length">
         <Loading></Loading>
+      </div>
       </div>
     </Scroll>
   </div>
@@ -31,17 +37,20 @@ import {getRecommend, getDiscList} from 'api/recommend'
 import {requestOk} from 'api/config'
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
+import Slide from 'base/slide/slide'
+
 export default {
   name: 'recommend',
   data() {
     return {
-      sliderRecommends: [],
-      discLists: []
+      discLists: [],
+      recomends: []
     }
   },
   components: {
     Scroll,
-    Loading
+    Loading,
+    Slide
   },
   created() {
     this._getRecommend()
@@ -51,7 +60,7 @@ export default {
     _getRecommend() {
       getRecommend().then(res => {
         if (res.code === requestOk) {
-          this.sliderRecommends = res.data.slider
+          this.recomends = res.data.slider
         }
       })
     },
@@ -81,7 +90,6 @@ export default {
   width: 100%;
   overflow: hidden;
   border: 1px solid red;
-
 }
 
 .list-title {
@@ -122,10 +130,10 @@ export default {
 .desc {
   color: rgba(255, 255, 255, 0.3);
 }
-.loading-conatiner{
+.loading-conatiner {
   position: absolute;
   width: 100%;
-  top:50%;
+  top: 50%;
   transform: translateY(-50%);
 }
 </style>
