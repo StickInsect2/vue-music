@@ -28,9 +28,11 @@ export default {
 }
 .tabItem {
   flex: 1;
+   text-align: center;
 }
 .tab-link {
-  padding: 2px 5px;
+  padding-bottom: 5px;
+  color: rgba(255, 255, 255, 0.5);
 }
 .active .tab-link {
   color: #ffcd32;

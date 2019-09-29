@@ -1,10 +1,3 @@
-/*
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-09-28 10:02:46
- * @LastEditTime: 2019-09-28 11:17:37
- * @LastEditors: Please set LastEditors
- */
 'use strict'
 const path = require('path')
 const utils = require('./utils')
@@ -16,14 +9,14 @@ function resolve(dir) {
 }
 
 const createLintingRule = () => ({
-  // test: /\.(js|vue)$/,
-  // loader: 'eslint-loader',
-  // enforce: 'pre',
-  // include: [resolve('src'), resolve('test')],
-  // options: {
-  //   formatter: require('eslint-friendly-formatter'),
-  //   emitWarning: !config.dev.showEslintErrorsInOverlay
-  // }
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
 })
 
 module.exports = {
