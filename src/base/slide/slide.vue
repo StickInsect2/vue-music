@@ -1,8 +1,8 @@
 /* eslint-disable vue/require-v-for-key */
 <!--  -->
 <template>
-  <div class="slider" ref="slider">
-    <div class="slider-group" ref="sliderGroup">
+  <div class="slider" ref="slider" >
+    <div class="slider-group" ref="sliderGroup" @mouseover="_autoPlayMouseOver" @mouseout="_autoPlayMouseOut" @touchstart="_autoPlayMouseOver" @touchend="_autoPlayMouseOut">
       <slot></slot>
     </div>
     <div class="dots">
@@ -88,9 +88,24 @@ export default {
     _play() {
       // 向目标页跳转
       this.timer = setInterval(() => {
-      // 如果是循环轮播,因为会触发scrollEnd函数,会多减个一所以要加二,否则前进一步进行了
+      // 如果是循环轮播,因为会触发scrollEnd函数,会多减个一所以要加二,非循环轮播前进一步即可
         this.slider.goToPage(this.loop ? this.currendIndex + 2 : this.currendIndex + 1, 0, 400)
       }, this.interval)
+    },
+    // 自动轮播时当鼠标移入,移除定时器,
+    _autoPlayMouseOver() {
+      console.log('鼠标移入')
+      if (this.autoPlay && this.timer) {
+        clearInterval(this.timer)
+        this.timer = null
+      }
+    },
+    // 自动轮播时当鼠标移入,添加定时器,
+    _autoPlayMouseOut() {
+      console.log('鼠标移出')
+      if (this.autoPlay && !this.timer) {
+        this._play()
+      }
     }
   },
   mounted() {
@@ -101,6 +116,9 @@ export default {
         this._play()
       }
     }, 20)
+  },
+  destroyed() {
+    clearInterval(this.timer)
   }
 }
 </script>
